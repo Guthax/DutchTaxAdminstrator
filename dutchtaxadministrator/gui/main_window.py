@@ -22,6 +22,7 @@ class DutchTaxAdministrator(QMainWindow):
         Connects signals
         """
         self.ui.new_adminitration_action.triggered.connect(self._show_add_administration_dialog)
+        self.ui.add_income_button.clicked.connect(self.ui.income_table.add_blank_row)
 
     def _show_add_administration_dialog(self):
         """
