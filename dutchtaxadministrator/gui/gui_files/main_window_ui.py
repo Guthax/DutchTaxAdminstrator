@@ -18,8 +18,10 @@ from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
     QLayout, QMainWindow, QMenu, QMenuBar,
-    QSizePolicy, QStatusBar, QTabWidget, QTableView,
-    QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
+
+from dutchtaxadministrator.gui.widgets.income_table import IncomeTable
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -84,12 +86,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.tableView = QTableView(self.income_tab)
-        self.tableView.setObjectName(u"tableView")
-        sizePolicy1.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
-        self.tableView.setSizePolicy(sizePolicy1)
+        self.add_income_button = QPushButton(self.income_tab)
+        self.add_income_button.setObjectName(u"add_income_button")
 
-        self.verticalLayout_3.addWidget(self.tableView)
+        self.verticalLayout_3.addWidget(self.add_income_button)
+
+        self.income_table = IncomeTable()
+        self.income_table.setObjectName(u"income_table")
+
+        self.verticalLayout_3.addWidget(self.income_table)
 
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
@@ -136,7 +141,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.overview_tab_widget.setCurrentIndex(3)
+        self.overview_tab_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -149,6 +154,7 @@ class Ui_MainWindow(object):
         self.administration_save_action.setText(QCoreApplication.translate("MainWindow", u"Save Administration", None))
         self.current_administration_label.setText(QCoreApplication.translate("MainWindow", u"Current Administration", None))
         self.current_administration_value_label.setText(QCoreApplication.translate("MainWindow", u"test", None))
+        self.add_income_button.setText(QCoreApplication.translate("MainWindow", u"Add Income", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.income_tab), QCoreApplication.translate("MainWindow", u"Income", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.expense_tab), QCoreApplication.translate("MainWindow", u"Expenses", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.quarter_overview_tab), QCoreApplication.translate("MainWindow", u"Quarter Overview", None))
