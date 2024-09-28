@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from PyQt6.QtCore import Qt, QRect, QCoreApplication, QMetaObject
-from PyQt6.QtGui import QAction
+
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
@@ -9,9 +8,18 @@ from PyQt6.QtGui import QAction
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
-                             QLayout, QMainWindow, QMenu, QMenuBar, QStatusBar, QTabWidget, QTableView,
-                             QVBoxLayout, QWidget, QSizePolicy)
+    QLayout, QMainWindow, QMenu, QMenuBar,
+    QSizePolicy, QStatusBar, QTabWidget, QTableView,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -23,12 +31,12 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        self.actionNew_Administration = QAction(MainWindow)
-        self.actionNew_Administration.setObjectName(u"actionNew_Administration")
-        self.actionOpen_Administration = QAction(MainWindow)
-        self.actionOpen_Administration.setObjectName(u"actionOpen_Administration")
-        self.actionSave_Administration = QAction(MainWindow)
-        self.actionSave_Administration.setObjectName(u"actionSave_Administration")
+        self.new_adminitration_action = QAction(MainWindow)
+        self.new_adminitration_action.setObjectName(u"new_adminitration_action")
+        self.administration_open_action = QAction(MainWindow)
+        self.administration_open_action.setObjectName(u"administration_open_action")
+        self.administration_save_action = QAction(MainWindow)
+        self.administration_save_action.setObjectName(u"administration_save_action")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
@@ -122,9 +130,9 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.menubar.addAction(self.menuAdministration.menuAction())
-        self.menuAdministration.addAction(self.actionNew_Administration)
-        self.menuAdministration.addAction(self.actionOpen_Administration)
-        self.menuAdministration.addAction(self.actionSave_Administration)
+        self.menuAdministration.addAction(self.new_adminitration_action)
+        self.menuAdministration.addAction(self.administration_open_action)
+        self.menuAdministration.addAction(self.administration_save_action)
 
         self.retranslateUi(MainWindow)
 
@@ -136,9 +144,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.actionNew_Administration.setText(QCoreApplication.translate("MainWindow", u"New Administration", None))
-        self.actionOpen_Administration.setText(QCoreApplication.translate("MainWindow", u"Open Administration", None))
-        self.actionSave_Administration.setText(QCoreApplication.translate("MainWindow", u"Save Administration", None))
+        self.new_adminitration_action.setText(QCoreApplication.translate("MainWindow", u"New Administration", None))
+        self.administration_open_action.setText(QCoreApplication.translate("MainWindow", u"Open Administration", None))
+        self.administration_save_action.setText(QCoreApplication.translate("MainWindow", u"Save Administration", None))
         self.current_administration_label.setText(QCoreApplication.translate("MainWindow", u"Current Administration", None))
         self.current_administration_value_label.setText(QCoreApplication.translate("MainWindow", u"test", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.income_tab), QCoreApplication.translate("MainWindow", u"Income", None))

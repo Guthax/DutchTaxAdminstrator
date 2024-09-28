@@ -164,24 +164,24 @@
     <property name="title">
      <string>Administration</string>
     </property>
-    <addaction name="actionNew_Administration"/>
-    <addaction name="actionOpen_Administration"/>
-    <addaction name="actionSave_Administration"/>
+    <addaction name="new_adminitration_action"/>
+    <addaction name="administration_open_action"/>
+    <addaction name="administration_save_action"/>
    </widget>
    <addaction name="menuAdministration"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionNew_Administration">
+  <action name="new_adminitration_action">
    <property name="text">
     <string>New Administration</string>
    </property>
   </action>
-  <action name="actionOpen_Administration">
+  <action name="administration_open_action">
    <property name="text">
     <string>Open Administration</string>
    </property>
   </action>
-  <action name="actionSave_Administration">
+  <action name="administration_save_action">
    <property name="text">
     <string>Save Administration</string>
    </property>

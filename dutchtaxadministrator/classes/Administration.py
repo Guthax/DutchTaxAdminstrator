@@ -4,7 +4,6 @@ from datetime import datetime
 from dutchtaxadministrator.classes import Income, Expense
 
 
-@dataclass
 class Administration:
     name: str
     year: int
