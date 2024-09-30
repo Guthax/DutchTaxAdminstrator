@@ -19,7 +19,6 @@ class AddAdministrationDialog(QDialog):
         """
         Emits new administration from values
         """
-        new_administration = Administration()
-        new_administration.name = self.ui.name_line_edit.text()
+        new_administration = Administration(self.ui.name_line_edit.text())
         new_administration.year = self.ui.year_spin_box.value()
         self.created_administration.emit(new_administration)
