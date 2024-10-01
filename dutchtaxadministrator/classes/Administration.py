@@ -7,8 +7,6 @@ import jsonpickle
 from dutchtaxadministrator.classes.Income import Income
 from dutchtaxadministrator.classes.Expense import Expense
 
-
-
 class Administration:
     name: str
     year: int
@@ -21,8 +19,6 @@ class Administration:
         self.save_location = None
         self.incomes = []
         self.expenses = []
-        income = Income()
-        self.incomes.append(income)
 
     def to_json(self):
         """
@@ -43,5 +39,12 @@ class Administration:
 
         return root
 
-
-
+def administration_from_json(administration_json_dict: dict) -> Administration:
+    administration = Administration(administration_json_dict['name'])
+    administration.year = administration_json_dict['year']
+    administration.save_location = administration_json_dict['save_location']
+    for income_dict in administration_json_dict['incomes']:
+        income_obj = Income.from_json(income_dict)
+        administration.incomes.append(income_obj)
+    return administration
+[]
