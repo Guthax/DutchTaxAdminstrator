@@ -6,7 +6,6 @@ from dutchtaxadministrator.gui.main_window import DutchTaxAdministrator
 
 
 def main():
-    print("test")
     application = QApplication(sys.argv)
     window = DutchTaxAdministrator()
     window.show()
