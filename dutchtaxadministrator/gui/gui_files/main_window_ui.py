@@ -8,20 +8,15 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
-from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+from PyQt6.QtCore import (QCoreApplication, QMetaObject, QRect,
+                          Qt)
+from PyQt6.QtGui import (QAction)
+from PyQt6.QtWidgets import (QHBoxLayout, QLabel,
+                             QLayout, QMenu, QMenuBar,
+                             QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+                             QVBoxLayout, QWidget)
 
-from dutchtaxadministrator.gui.widgets.income_table import IncomeTable
+from dutchtaxadministrator.gui.widgets.views.income_table_view import IncomeTableView
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -91,10 +86,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.add_income_button)
 
-        self.income_table = IncomeTable()
-        self.income_table.setObjectName(u"income_table")
+        self.income_table_view = IncomeTableView(self.income_tab)
+        self.income_table_view.setObjectName(u"income_table_view")
 
-        self.verticalLayout_3.addWidget(self.income_table)
+        self.verticalLayout_3.addWidget(self.income_table_view)
 
 
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)

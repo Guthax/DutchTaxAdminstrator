@@ -1,0 +1,46 @@
+{
+    "name": "testfiles",
+    "year": 2010,
+    "save_location": "/home/jurriaan/Documents/Programming/DutchTaxAdminstrator/dutchtaxadministrator/tests/test_files/testfiles",
+    "incomes": [
+        {
+            "invoice_id": "hoi",
+            "name": "hoi",
+            "client": "hoih",
+            "description": "Catering",
+            "amount_ex_vat": 1.2,
+            "amount_inc_vat": 3.3,
+            "vat_percentage": 1.12,
+            "total_hours": 124,
+            "attachments": [
+                "/home/jurriaan/Documents/Programming/DutchTaxAdminstrator/dutchtaxadministrator/tests/test_files/testfiles/testfiles_data.json",
+                "/home/jurriaan/Documents/Programming/DutchTaxAdminstrator/dutchtaxadministrator/__init__.py",
+                "/home/jurriaan/Documents/Programming/DutchTaxAdminstrator/dutchtaxadministrator/tests/test_files/testfiles/testfiles_data.json"
+            ]
+        },
+        {
+            "invoice_id": "aa",
+            "name": "cxx",
+            "client": "to",
+            "description": "tas",
+            "amount_ex_vat": 2.1,
+            "amount_inc_vat": 2.4,
+            "vat_percentage": 3.1,
+            "total_hours": 24,
+            "attachments": []
+        },
+        {
+            "invoice_id": "",
+            "name": "",
+            "client": "",
+            "description": "",
+            "amount_ex_vat": 0,
+            "amount_inc_vat": 0,
+            "vat_percentage": 0,
+            "total_hours": 0,
+            "attachments": [
+                "/home/jurriaan/Downloads/appdev/CV Jurriaan Buitenweg NL (1).pdf"
+            ]
+        }
+    ]
+}
