@@ -8,11 +8,11 @@ class Income:
     amount_inc_vat: float
     total_hours: float
     total_costs: float
-    attachment: str
+    attachment: list
 
     def __init__(self, invoice_id: str = "", name: str = "", client: str = "", description: str = "",
                  amount_ex_vat: float = 0.0, vat_percentage: float = 21.0, amount_inc_vat: float = 0.0,
-                 total_hours: float = 0.0, total_costs: float = 0.0, attachment: str = ""):
+                 total_hours: float = 0.0, total_costs: float = 0.0, attachments: list[str] = []):
         self.invoice_id = invoice_id
         self.name = name
         self.client = client
@@ -22,7 +22,7 @@ class Income:
         self.amount_inc_vat = amount_inc_vat
         self.total_hours = total_hours
         self.total_costs = total_costs
-        self.attachment = attachment
+        self.attachments = attachments
 
     def to_json(self) -> dict:
         """
@@ -40,7 +40,7 @@ class Income:
             "vat_percentage": self.vat_percentage,
             "total_hours": self.total_hours,
             "total_costs": self.total_costs,
-            "attachment": self.attachment,
+            "attachments": self.attachments,
         }
 
     @classmethod
@@ -62,5 +62,5 @@ class Income:
             vat_percentage=income_json_dict["vat_percentage"],
             total_hours=income_json_dict["total_hours"],
             total_costs=income_json_dict["total_costs"],
-            attachment=income_json_dict["attachment"],
+            attachments=income_json_dict["attachments"],
         )

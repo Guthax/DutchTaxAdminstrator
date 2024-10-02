@@ -1,7 +1,5 @@
 import sys
-from PyQt6.QtWidgets import (QApplication, QDialog, QFileDialog,
-                             QHBoxLayout, QLabel, QMainWindow, QToolBar, QVBoxLayout, QWidget)
-
+from PyQt6.QtWidgets import QApplication
 from dutchtaxadministrator.gui.main_window import DutchTaxAdministrator
 
 
