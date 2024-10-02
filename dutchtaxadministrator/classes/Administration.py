@@ -4,7 +4,7 @@ from tkinter.font import names
 
 import jsonpickle
 
-from dutchtaxadministrator.classes.Income import Income
+from dutchtaxadministrator.classes.Income import Income, from_json
 from dutchtaxadministrator.classes.Expense import Expense
 
 class Administration:
@@ -19,6 +19,9 @@ class Administration:
         self.save_location = None
         self.incomes = []
         self.expenses = []
+
+    def set_incomes(self, incomes: list[Income]):
+        self.incomes = incomes
 
     def to_json(self):
         """
@@ -44,7 +47,7 @@ def administration_from_json(administration_json_dict: dict) -> Administration:
     administration.year = administration_json_dict['year']
     administration.save_location = administration_json_dict['save_location']
     for income_dict in administration_json_dict['incomes']:
-        income_obj = Income.from_json(income_dict)
+        income_obj = from_json(income_dict)
         administration.incomes.append(income_obj)
     return administration
 []

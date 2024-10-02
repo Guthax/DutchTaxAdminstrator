@@ -106,7 +106,7 @@
              </widget>
             </item>
             <item>
-             <widget class="IncomeTable" name="income_table"/>
+             <widget class="IncomeTableView" name="income_table_view"/>
             </item>
            </layout>
           </item>
@@ -189,9 +189,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>IncomeTable</class>
-   <extends>QTableWidget</extends>
-   <header location="global">dutchtaxadministrator.gui.widgets.income_table.h</header>
+   <class>IncomeTableView</class>
+   <extends>QTableView</extends>
+   <header>dutchtaxadministrator.gui.widgets.income_table_view.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
