@@ -1,4 +1,6 @@
 import json
+import os.path
+from zipfile import ZipFile
 
 from PyQt6.QtGui import QShortcut, QKeySequence
 
@@ -50,6 +52,11 @@ class DutchTaxAdministrator(QMainWindow):
             administration (Administration): Administration to configure
         """
         self.current_administration = administration
+
+        if not os.path.exists(self.current_administration.save_location):
+            os.mkdir(self.current_administration.save_location)
+
+
         self.ui.current_administration_value_label.setText(
             f"{self.current_administration.name} "
             f"({self.current_administration.year})")
@@ -79,28 +86,18 @@ class DutchTaxAdministrator(QMainWindow):
         """
         self.current_administration.incomes = self.ui.income_table.get_incomes_as_object()
 
-        if not self.current_administration.save_location:
-            file_name, _ = QFileDialog.getSaveFileName(self,
-                                                       "Save JSON File",
-                                                       "",
-                                                       "JSON Files (*.json);;All Files (*)")
-        else:
-            file_name = self.current_administration.save_location
-        # If the user selects a file name
-        if file_name:
-            # Ensure the file has the .json extension
-            if not file_name.endswith('.json'):
-                file_name += '.json'
+        folder = self.current_administration.save_location
+        data_json_loc = f"{folder}/{self.current_administration.name}_data.json"
 
-            # Save the data as a JSON file
-            try:
-                with open(file_name, 'w') as json_file:
-                    self.current_administration.save_location = file_name
-                    json_to_save = self.current_administration.to_json()
-                    json.dump(json_to_save, json_file, indent=4)
+        try:
+            with open(data_json_loc, 'w') as json_file:
+                json_to_save = self.current_administration.to_json()
+                json.dump(json_to_save, json_file, indent=4)
 
-            except Exception as e:
-                print(f"Error saving file: {e}")
+        except Exception as e:
+            print(f"Error saving file: {e}")
+
+
 
     def closeEvent(self, event):
         """

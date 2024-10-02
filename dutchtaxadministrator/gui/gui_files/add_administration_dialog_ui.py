@@ -16,8 +16,8 @@ from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PyQt6.QtWidgets import (QAbstractButton, QApplication, QDialog, QDialogButtonBox,
-    QFormLayout, QLabel, QLineEdit, QSizePolicy,
-    QSpinBox, QWidget)
+    QFormLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpinBox, QWidget)
 
 class Ui_add_administration_dialog(object):
     def setupUi(self, add_administration_dialog):
@@ -53,7 +53,23 @@ class Ui_add_administration_dialog(object):
         self.button_box.setOrientation(Qt.Orientation.Horizontal)
         self.button_box.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
-        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.button_box)
+        self.formLayout_2.setWidget(4, QFormLayout.ItemRole.FieldRole, self.button_box)
+
+        self.storage_location_path_edit = QLineEdit(add_administration_dialog)
+        self.storage_location_path_edit.setObjectName(u"storage_location_path_edit")
+        self.storage_location_path_edit.setReadOnly(True)
+
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.FieldRole, self.storage_location_path_edit)
+
+        self.storage_location_label = QLabel(add_administration_dialog)
+        self.storage_location_label.setObjectName(u"storage_location_label")
+
+        self.formLayout_2.setWidget(2, QFormLayout.ItemRole.LabelRole, self.storage_location_label)
+
+        self.storage_location_push_button = QPushButton(add_administration_dialog)
+        self.storage_location_push_button.setObjectName(u"storage_location_push_button")
+
+        self.formLayout_2.setWidget(3, QFormLayout.ItemRole.FieldRole, self.storage_location_push_button)
 
 
         self.retranslateUi(add_administration_dialog)
@@ -67,5 +83,7 @@ class Ui_add_administration_dialog(object):
         add_administration_dialog.setWindowTitle(QCoreApplication.translate("add_administration_dialog", u"Add new administration", None))
         self.name_label.setText(QCoreApplication.translate("add_administration_dialog", u"Name", None))
         self.year_label.setText(QCoreApplication.translate("add_administration_dialog", u"Year", None))
+        self.storage_location_label.setText(QCoreApplication.translate("add_administration_dialog", u"TextLabel", None))
+        self.storage_location_push_button.setText(QCoreApplication.translate("add_administration_dialog", u"Choose storage location", None))
     # retranslateUi
 
