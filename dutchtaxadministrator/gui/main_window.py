@@ -10,6 +10,7 @@ from dutchtaxadministrator.gui.add_administration_dialog import AddAdministratio
 from dutchtaxadministrator.gui.gui_files.main_window_ui import Ui_MainWindow
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QFileDialog, QMessageBox
 
+from dutchtaxadministrator.models.expense_table_model import ExpenseTableModel
 from dutchtaxadministrator.models.income_table_model import IncomeTableModel
 
 
@@ -28,8 +29,14 @@ class DutchTaxAdministrator(QMainWindow):
 
 
         self.income_model = IncomeTableModel()
+        self.expense_model = ExpenseTableModel()
+
         self.ui.income_table_view.setModel(self.income_model)
         self.ui.income_table_view.set_delegates()
+
+        self.ui.expenses_table_view.setModel(self.expense_model)
+        self.ui.expenses_table_view.set_delegates()
+
         self.connect_signals()
 
     def connect_signals(self):
@@ -42,8 +49,10 @@ class DutchTaxAdministrator(QMainWindow):
         self.ui.administration_open_action.triggered.connect(self.load_administration)
         self.save_shortcut.activated.connect(self.administration_manager.save_administration)
         self.income_model.incomes_changed.connect(self.administration_manager.update_administration_incomes)
+        self.expense_model.expenses_changed.connect(self.administration_manager.update_administration_expenses)
         self.administration_manager.administration_changed.connect(self._configure_administration)
         self.ui.add_income_button.clicked.connect(self.income_model.add_empty_income)
+        self.ui.add_expense_button.clicked.connect(self.expense_model.add_empty_expense)
     def _show_add_administration_dialog(self):
         """
         Shows add administration dialog
@@ -62,8 +71,9 @@ class DutchTaxAdministrator(QMainWindow):
         self.ui.current_administration_value_label.setText(
             f"{self.administration_manager.administration.name} "
             f"({self.administration_manager.administration.year})")
-        self.ui.overview_tab_widget.setCurrentIndex(0)
+        #self.ui.overview_tab_widget.setCurrentIndex(0)
         self.income_model.incomes = self.administration_manager.administration.incomes
+        self.expense_model.expenses = self.administration_manager.administration.expenses
         self.income_model.layoutChanged.emit()
 
     def load_administration(self):

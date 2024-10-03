@@ -8,14 +8,20 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PyQt6.QtCore import (QCoreApplication, QMetaObject, QRect,
-                          Qt)
-from PyQt6.QtGui import (QAction)
-from PyQt6.QtWidgets import (QHBoxLayout, QLabel,
-                             QLayout, QMenu, QMenuBar,
-                             QPushButton, QSizePolicy, QStatusBar, QTabWidget,
-                             QVBoxLayout, QWidget)
+from PyQt6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
+    QLayout, QMainWindow, QMenu, QMenuBar,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QVBoxLayout, QWidget)
 
+from dutchtaxadministrator.gui.widgets.views.expense_table_view import ExpenseTableView
 from dutchtaxadministrator.gui.widgets.views.income_table_view import IncomeTableView
 
 class Ui_MainWindow(object):
@@ -99,16 +105,37 @@ class Ui_MainWindow(object):
         self.expense_tab.setObjectName(u"expense_tab")
         sizePolicy1.setHeightForWidth(self.expense_tab.sizePolicy().hasHeightForWidth())
         self.expense_tab.setSizePolicy(sizePolicy1)
+        self.horizontalLayout_6 = QHBoxLayout(self.expense_tab)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.verticalLayout_7 = QVBoxLayout()
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.add_expense_button = QPushButton(self.expense_tab)
+        self.add_expense_button.setObjectName(u"add_expense_button")
+
+        self.verticalLayout_7.addWidget(self.add_expense_button)
+
+        self.expenses_table_view = ExpenseTableView(self.expense_tab)
+        self.expenses_table_view.setObjectName(u"expenses_table_view")
+
+        self.verticalLayout_7.addWidget(self.expenses_table_view)
+
+
+        self.horizontalLayout_6.addLayout(self.verticalLayout_7)
+
         self.overview_tab_widget.addTab(self.expense_tab, "")
         self.quarter_overview_tab = QWidget()
         self.quarter_overview_tab.setObjectName(u"quarter_overview_tab")
         sizePolicy1.setHeightForWidth(self.quarter_overview_tab.sizePolicy().hasHeightForWidth())
         self.quarter_overview_tab.setSizePolicy(sizePolicy1)
+        self.horizontalLayout_7 = QHBoxLayout(self.quarter_overview_tab)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.overview_tab_widget.addTab(self.quarter_overview_tab, "")
         self.year_overview_tab = QWidget()
         self.year_overview_tab.setObjectName(u"year_overview_tab")
         sizePolicy1.setHeightForWidth(self.year_overview_tab.sizePolicy().hasHeightForWidth())
         self.year_overview_tab.setSizePolicy(sizePolicy1)
+        self.horizontalLayout_5 = QHBoxLayout(self.year_overview_tab)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.overview_tab_widget.addTab(self.year_overview_tab, "")
 
         self.verticalLayout_2.addWidget(self.overview_tab_widget)
@@ -136,7 +163,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.overview_tab_widget.setCurrentIndex(0)
+        self.overview_tab_widget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -151,6 +178,7 @@ class Ui_MainWindow(object):
         self.current_administration_value_label.setText(QCoreApplication.translate("MainWindow", u"test", None))
         self.add_income_button.setText(QCoreApplication.translate("MainWindow", u"Add Income", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.income_tab), QCoreApplication.translate("MainWindow", u"Income", None))
+        self.add_expense_button.setText(QCoreApplication.translate("MainWindow", u"Add Expense", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.expense_tab), QCoreApplication.translate("MainWindow", u"Expenses", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.quarter_overview_tab), QCoreApplication.translate("MainWindow", u"Quarter Overview", None))
         self.overview_tab_widget.setTabText(self.overview_tab_widget.indexOf(self.year_overview_tab), QCoreApplication.translate("MainWindow", u"Yearly Overview", None))

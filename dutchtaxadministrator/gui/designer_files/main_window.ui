@@ -83,7 +83,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="income_tab">
          <property name="sizePolicy">
@@ -122,6 +122,22 @@
          <attribute name="title">
           <string>Expenses</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QPushButton" name="add_expense_button">
+              <property name="text">
+               <string>Add Expense</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="ExpenseTableView" name="expenses_table_view"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="quarter_overview_tab">
          <property name="sizePolicy">
@@ -133,6 +149,7 @@
          <attribute name="title">
           <string>Quarter Overview</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_7"/>
         </widget>
         <widget class="QWidget" name="year_overview_tab">
          <property name="sizePolicy">
@@ -144,6 +161,7 @@
          <attribute name="title">
           <string>Yearly Overview</string>
          </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_5"/>
         </widget>
        </widget>
       </item>
@@ -191,7 +209,12 @@
   <customwidget>
    <class>IncomeTableView</class>
    <extends>QTableView</extends>
-   <header>dutchtaxadministrator.gui.widgets.income_table_view.h</header>
+   <header>dutchtaxadministrator.gui.widgets.views.income_table_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ExpenseTableView</class>
+   <extends>QTableView</extends>
+   <header>dutchtaxadministrator.gui.widgets.views.expense_table_view.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

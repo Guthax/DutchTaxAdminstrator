@@ -4,6 +4,7 @@ import os
 from PyQt6.QtCore import pyqtSignal, QObject
 
 from dutchtaxadministrator.classes.Administration import Administration, administration_from_json
+from dutchtaxadministrator.classes.Expense import Expense
 from dutchtaxadministrator.classes.Income import Income
 
 
@@ -35,6 +36,20 @@ class AdministrationManager(QObject):
             2. Emits the administration_changed signal to notify that the administration's incomes have been updated.
         """
         self.administration.set_incomes(incomes)
+        self.administration_changed.emit()
+
+    def update_administration_expenses(self, expenses: list[Expense]):
+        """
+        Updates the administration expenses with the provided list of Expense objects.
+
+        Parameters:
+            expenses (list[Expense]): A list of Expense objects to update the administration's expenses.
+
+        Actions:
+            1. Sets the administration's expense with the provided list.
+            2. Emits the administration_changed signal to notify that the administration's expense have been updated.
+        """
+        self.administration.set_expenses(expenses)
         self.administration_changed.emit()
 
     def new_administration(self, name: str, year: int, save_location: str):
