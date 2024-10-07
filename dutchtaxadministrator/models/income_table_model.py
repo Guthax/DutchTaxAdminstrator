@@ -1,8 +1,26 @@
+from datetime import datetime
+from enum import Enum
 from sys import orig_argv
 
 from PyQt6.QtCore import QAbstractTableModel, Qt, pyqtSignal, QModelIndex
 
-from dutchtaxadministrator.classes.Income import Income
+from dutchtaxadministrator.classes.income import Income
+
+
+class FieldToColumn(Enum):
+    INVOICE_ID = (0, "Invoice id")
+    DATE = (1, "Date")
+    NAME = (2, "Name")
+    SELLER = (3, "Client")
+    DESCRIPTION = (4, "Description")
+    AMOUNT_EX_VAT = (5, "Amount (Ex VAT)")
+    VAT_PERCENTAGE = (6, "VAT Percentage")
+    AMOUNT_INC_VAT = (7, "Amount (Inc VAT)")
+    TOTAL_HOURS = (8, "Total hours")
+    ATTACHEMENTS = (9, "Attachments")
+    ACTIONS = (10, "Actions")
+
+
 
 class IncomeTableModel(QAbstractTableModel):
     """
@@ -19,7 +37,7 @@ class IncomeTableModel(QAbstractTableModel):
         return len(self.incomes)
 
     def columnCount(self, parent=None):
-        return 10
+        return 11
 
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         """
@@ -47,24 +65,27 @@ class IncomeTableModel(QAbstractTableModel):
         income = self.incomes[index.row()]
         column = index.column()
         if role == Qt.ItemDataRole.DisplayRole or role == Qt.ItemDataRole.EditRole:
-            if column == 0:
+            if column == FieldToColumn.INVOICE_ID.value[0]:
                 return income.invoice_id
-            elif column == 1:
+            elif column == FieldToColumn.DATE.value[0]:
+                return income.date.strftime("%d/%m/%Y")
+            elif column == FieldToColumn.NAME.value[0]:
                 return income.name
-            elif column == 2:
+            elif column == FieldToColumn.SELLER.value[0]:
                 return income.client
-            elif column == 3:
+            elif column == FieldToColumn.DESCRIPTION.value[0]:
                 return income.description
-            elif column == 4:
+            elif column == FieldToColumn.AMOUNT_EX_VAT.value[0]:
                 return income.amount_ex_vat
-            elif column == 5:
+            elif column == FieldToColumn.VAT_PERCENTAGE.value[0]:
                 return income.vat_percentage
-            elif column == 6:
+            elif column == FieldToColumn.AMOUNT_INC_VAT.value[0]:
                 return income.amount_inc_vat
-            elif column == 7:
+            elif column == FieldToColumn.TOTAL_HOURS.value[0]:
                 return income.total_hours
-            elif column == 8:
+            elif column == FieldToColumn.ATTACHEMENTS.value[0]:
                 return income.attachments[len(income.attachments) - 1] if income.attachments else "No attachments"
+
         return None
 
     def setData(self, index, value, role = ...):
@@ -83,23 +104,25 @@ class IncomeTableModel(QAbstractTableModel):
             return False
         income = self.incomes[index.row()]
         column = index.column()
-        if column == 0:
+        if column == FieldToColumn.INVOICE_ID.value[0]:
             income.invoice_id = value
-        elif column == 1:
+        elif column == FieldToColumn.DATE.value[0]:
+            income.date = datetime.strptime(value, "%d/%m/%Y")
+        elif column == FieldToColumn.NAME.value[0]:
             income.name = value
-        elif column == 2:
+        elif column == FieldToColumn.SELLER.value[0]:
             income.client = value
-        elif column == 3:
+        elif column == FieldToColumn.DESCRIPTION.value[0]:
             income.description = value
-        elif column == 4:
+        elif column == FieldToColumn.AMOUNT_EX_VAT.value[0]:
             income.amount_ex_vat = value
-        elif column == 5:
+        elif column == FieldToColumn.VAT_PERCENTAGE.value[0]:
             income.vat_percentage = value
-        elif column == 6:
+        elif column == FieldToColumn.AMOUNT_INC_VAT.value[0]:
             income.amount_inc_vat = value
-        elif column == 7:
+        elif column == FieldToColumn.TOTAL_HOURS.value[0]:
             income.total_hours = value
-        elif column == 9:
+        elif column == FieldToColumn.ATTACHEMENTS.value[0]:
             income.attachments.append(value)
         self.incomes[index.row()] = income
         self.incomes_changed.emit(self.incomes)
@@ -118,9 +141,7 @@ class IncomeTableModel(QAbstractTableModel):
         """
         if role == Qt.ItemDataRole.DisplayRole:
             if orientation == Qt.Orientation.Horizontal:  # Column headers
-                headers = ["Invoice ID", "Name", "Client", "Description",
-                           "Amount (EX VAT)", "Vat Percentage", "Amount (inc vat)",
-                           "Total hours", "Attachments", "Actions"]
+                headers = [field.value[1] for field in FieldToColumn]
                 return headers[section]
         return None
 
@@ -137,6 +158,7 @@ class IncomeTableModel(QAbstractTableModel):
         """
         income = Income()
         self.incomes.append(Income())
+        self.incomes_changed.emit(self.incomes)
         self.layoutChanged.emit()
 
     def flags(self, index):
@@ -150,7 +172,7 @@ class IncomeTableModel(QAbstractTableModel):
         Returns:
         Qt.ItemFlag: The item flags applicable for the given index. If the column of the index is 8, it returns NoItemFlags, indicating no item interaction is possible. Otherwise, it returns a combination of flags indicating the item is enabled, selectable, and editable.
         """
-        if index.column() == 8:
+        if index.column() in [7,9]:
             return Qt.ItemFlag.NoItemFlags
 
         return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEditable

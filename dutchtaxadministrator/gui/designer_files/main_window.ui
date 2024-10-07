@@ -83,7 +83,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="income_tab">
          <property name="sizePolicy">
@@ -149,7 +149,11 @@
          <attribute name="title">
           <string>Quarter Overview</string>
          </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_7"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QuarterOverviewTableWidget" name="quarter_overview_table_widget"/>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="year_overview_tab">
          <property name="sizePolicy">
@@ -161,7 +165,11 @@
          <attribute name="title">
           <string>Yearly Overview</string>
          </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_5"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="YearlyOverviewTableWidget" name="yearly_overview_table_widget"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
@@ -215,6 +223,16 @@
    <class>ExpenseTableView</class>
    <extends>QTableView</extends>
    <header>dutchtaxadministrator.gui.widgets.views.expense_table_view.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QuarterOverviewTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>dutchtaxadministrator.gui.widgets.quarter_overview_table_widget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>YearlyOverviewTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>dutchtaxadministrator.gui.widgets.yearly_overview_table_widget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -1,7 +1,9 @@
-from PyQt6.QtWidgets import QTableView, QPushButton
+from PyQt6.QtWidgets import QTableView, QPushButton, QHeaderView
 
+from dutchtaxadministrator.gui.delegates.date_delegate import DateDelegate
 from dutchtaxadministrator.gui.delegates.float_delegate import FloatDelegate
 from dutchtaxadministrator.gui.delegates.upload_file_delegate import FileUploadDelegate
+from dutchtaxadministrator.models.income_table_model import FieldToColumn
 
 
 class IncomeTableView(QTableView):
@@ -12,10 +14,13 @@ class IncomeTableView(QTableView):
         super().__init__(parent)
         self.float_delegate = FloatDelegate()
         self.file_upload_delegate = FileUploadDelegate()
+        self.date_delegate = DateDelegate()
+        self.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
     def set_delegates(self):
-        self.setItemDelegateForColumn(4, self.float_delegate)
-        self.setItemDelegateForColumn(5, self.float_delegate)
-        self.setItemDelegateForColumn(6, self.float_delegate)
-        self.setItemDelegateForColumn(9, self.file_upload_delegate)
+        self.setItemDelegateForColumn(FieldToColumn.DATE.value[0] , self.date_delegate)
+        self.setItemDelegateForColumn(FieldToColumn.AMOUNT_EX_VAT.value[0], self.float_delegate)
+        self.setItemDelegateForColumn(FieldToColumn.VAT_PERCENTAGE.value[0], self.float_delegate)
+        self.setItemDelegateForColumn(FieldToColumn.AMOUNT_INC_VAT.value[0], self.float_delegate)
+        self.setItemDelegateForColumn(FieldToColumn.ACTIONS.value[0], self.file_upload_delegate)
 

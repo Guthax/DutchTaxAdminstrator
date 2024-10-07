@@ -3,9 +3,9 @@ import os
 
 from PyQt6.QtCore import pyqtSignal, QObject
 
-from dutchtaxadministrator.classes.Administration import Administration, administration_from_json
-from dutchtaxadministrator.classes.Expense import Expense
-from dutchtaxadministrator.classes.Income import Income
+from dutchtaxadministrator.classes.administration import Administration, administration_from_json
+from dutchtaxadministrator.classes.expense import Expense
+from dutchtaxadministrator.classes.income import Income
 
 
 class AdministrationManager(QObject):

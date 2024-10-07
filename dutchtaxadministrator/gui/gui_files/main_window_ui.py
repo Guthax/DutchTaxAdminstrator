@@ -19,10 +19,12 @@ from PyQt6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
     QLayout, QMainWindow, QMenu, QMenuBar,
     QPushButton, QSizePolicy, QStatusBar, QTabWidget,
-    QVBoxLayout, QWidget)
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
+from dutchtaxadministrator.gui.widgets.quarter_overview_table_widget import QuarterOverviewTableWidget
 from dutchtaxadministrator.gui.widgets.views.expense_table_view import ExpenseTableView
 from dutchtaxadministrator.gui.widgets.views.income_table_view import IncomeTableView
+from dutchtaxadministrator.gui.widgets.yearly_overview_table_widget import YearlyOverviewTableWidget
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -129,6 +131,11 @@ class Ui_MainWindow(object):
         self.quarter_overview_tab.setSizePolicy(sizePolicy1)
         self.horizontalLayout_7 = QHBoxLayout(self.quarter_overview_tab)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.quarter_overview_table_widget = QuarterOverviewTableWidget(self.quarter_overview_tab)
+        self.quarter_overview_table_widget.setObjectName(u"quarter_overview_table_widget")
+
+        self.horizontalLayout_7.addWidget(self.quarter_overview_table_widget)
+
         self.overview_tab_widget.addTab(self.quarter_overview_tab, "")
         self.year_overview_tab = QWidget()
         self.year_overview_tab.setObjectName(u"year_overview_tab")
@@ -136,6 +143,11 @@ class Ui_MainWindow(object):
         self.year_overview_tab.setSizePolicy(sizePolicy1)
         self.horizontalLayout_5 = QHBoxLayout(self.year_overview_tab)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.yearly_overview_table_widget = YearlyOverviewTableWidget(self.year_overview_tab)
+        self.yearly_overview_table_widget.setObjectName(u"yearly_overview_table_widget")
+
+        self.horizontalLayout_5.addWidget(self.yearly_overview_table_widget)
+
         self.overview_tab_widget.addTab(self.year_overview_tab, "")
 
         self.verticalLayout_2.addWidget(self.overview_tab_widget)
@@ -163,7 +175,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.overview_tab_widget.setCurrentIndex(1)
+        self.overview_tab_widget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

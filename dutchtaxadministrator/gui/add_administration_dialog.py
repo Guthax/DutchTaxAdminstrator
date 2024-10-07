@@ -2,7 +2,7 @@ from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtWidgets import QFileDialog
 
-from dutchtaxadministrator.classes.Administration import Administration
+from dutchtaxadministrator.classes.administration import Administration
 from dutchtaxadministrator.gui.gui_files.add_administration_dialog_ui import Ui_add_administration_dialog
 
 class AddAdministrationDialog(QDialog):
