@@ -24,16 +24,16 @@ class CreditCalculator:
         self.gross_expenses_ex_vat = sum([expense.amount_ex_vat * expense.percentage_deductable for expense in self.administration.expenses])
 
         self.independent_deductions = 0 #self.calculate_independent_deductions()
-        self.starter_deductions = 0#self.calculate_starter_deductions()
-        self.investment_deductions = 0#self.calculate_investment_deductions()
+        self.starter_deductions = 0 #self.calculate_starter_deductions()
+        self.investment_deductions = 0 #self.calculate_investment_deductions()
         deductions = sum([self.independent_deductions, self.starter_deductions, self.investment_deductions])
 
         self.gross_profit = self.gross_income_ex_vat - self.gross_expenses_ex_vat - deductions
 
-        self.mkb_regulation = 0#self.calculate_mkb_regulation()
+        self.mkb_regulation = 0 #self.calculate_mkb_regulation()
 
         self.taxable_profit = self.gross_profit - self.mkb_regulation
-
+    
         self.full_tax = self.calculate_full_tax()
 
         self.general_tax_discount = self.calculate_general_tax_discount()
