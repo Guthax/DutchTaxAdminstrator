@@ -1,8 +1,25 @@
+from datetime import datetime
+from enum import Enum
 from sys import orig_argv
 
 from PyQt6.QtCore import QAbstractTableModel, Qt, pyqtSignal, QModelIndex
 
-from dutchtaxadministrator.classes.Expense import Expense
+from dutchtaxadministrator.classes.expense import Expense
+
+class FieldToColumn(Enum):
+    INVOICE_ID = (0, "Invoice id")
+    DATE = (1, "Date")
+    NAME = (2, "Name")
+    SELLER = (3, "Seller")
+    DESCRIPTION = (4, "Description")
+    AMOUNT_EX_VAT = (5, "Amount (Ex VAT)")
+    VAT_PERCENTAGE = (6, "VAT Percentage")
+    AMOUNT_INC_VAT = (7, "Amount (Inc VAT)")
+    PERCENTAGE_DEDUCTABLE = (8, "Percentage Deductible")
+    ATTACHEMENTS = (9, "Attachments")
+    ACTIONS = (10, "Actions")
+
+
 
 class ExpenseTableModel(QAbstractTableModel):
     """
@@ -19,7 +36,7 @@ class ExpenseTableModel(QAbstractTableModel):
         return len(self.expenses)
 
     def columnCount(self, parent=None):
-        return 9
+        return len(FieldToColumn)
 
     def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         """
@@ -47,21 +64,25 @@ class ExpenseTableModel(QAbstractTableModel):
         expense = self.expenses[index.row()]
         column = index.column()
         if role == Qt.ItemDataRole.DisplayRole or role == Qt.ItemDataRole.EditRole:
-            if column == 0:
+            if column == FieldToColumn.INVOICE_ID.value[0]:
                 return expense.invoice_id
-            elif column == 1:
+            elif column == FieldToColumn.DATE.value[0]:
+                return expense.date.strftime("%d/%m/%Y")
+            elif column == FieldToColumn.NAME.value[0]:
                 return expense.name
-            elif column == 2:
+            elif column == FieldToColumn.SELLER.value[0]:
                 return expense.seller
-            elif column == 3:
+            elif column == FieldToColumn.DESCRIPTION.value[0]:
                 return expense.description
-            elif column == 4:
+            elif column == FieldToColumn.AMOUNT_EX_VAT.value[0]:
                 return expense.amount_ex_vat
-            elif column == 5:
+            elif column == FieldToColumn.VAT_PERCENTAGE.value[0]:
                 return expense.vat_percentage
-            elif column == 6:
+            elif column == FieldToColumn.AMOUNT_INC_VAT.value[0]:
                 return expense.amount_inc_vat
-            elif column == 7:
+            elif column == FieldToColumn.PERCENTAGE_DEDUCTABLE.value[0]:
+                return expense.percentage_deductable
+            elif column == FieldToColumn.ATTACHEMENTS.value[0]:
                 return expense.attachments[len(expense.attachments) - 1] if expense.attachments else "No attachments"
         return None
 
@@ -81,21 +102,25 @@ class ExpenseTableModel(QAbstractTableModel):
             return False
         expense = self.expenses[index.row()]
         column = index.column()
-        if column == 0:
+        if column == FieldToColumn.INVOICE_ID.value[0]:
             expense.invoice_id = value
-        elif column == 1:
+        elif column == FieldToColumn.DATE.value[0]:
+            expense.date = datetime.strptime(value, "%d/%m/%Y")
+        elif column == FieldToColumn.NAME.value[0]:
             expense.name = value
-        elif column == 2:
+        elif column == FieldToColumn.SELLER.value[0]:
             expense.seller = value
-        elif column == 3:
+        elif column == FieldToColumn.DESCRIPTION.value[0]:
             expense.description = value
-        elif column == 4:
+        elif column == FieldToColumn.AMOUNT_EX_VAT.value[0]:
             expense.amount_ex_vat = value
-        elif column == 5:
+        elif column == FieldToColumn.VAT_PERCENTAGE.value[0]:
             expense.vat_percentage = value
-        elif column == 6:
+        elif column == FieldToColumn.AMOUNT_INC_VAT.value[0]:
             expense.amount_inc_vat = value
-        elif column == 8:
+        elif column == FieldToColumn.PERCENTAGE_DEDUCTABLE.value[0]:
+            expense.percentage_deductable = value
+        elif column == FieldToColumn.ATTACHEMENTS.value[0]:
             expense.attachments.append(value)
         self.expenses[index.row()] = expense
         self.expenses_changed.emit(self.expenses)
@@ -114,9 +139,7 @@ class ExpenseTableModel(QAbstractTableModel):
         """
         if role == Qt.ItemDataRole.DisplayRole:
             if orientation == Qt.Orientation.Horizontal:  # Column headers
-                headers = ["Invoice ID", "Name", "Seller", "Description",
-                           "Amount (EX VAT)", "Vat Percentage", "Amount (inc vat)",
-                           "Attachments", "Actions"]
+                headers = [field.value[1] for field in FieldToColumn]
                 return headers[section]
         return None
 
@@ -146,7 +169,7 @@ class ExpenseTableModel(QAbstractTableModel):
         Returns:
         Qt.ItemFlag: The item flags applicable for the given index. If the column of the index is 8, it returns NoItemFlags, indicating no item interaction is possible. Otherwise, it returns a combination of flags indicating the item is enabled, selectable, and editable.
         """
-        if index.column() == 7:
+        if index.column() == [FieldToColumn.ATTACHEMENTS.value[0]]:
             return Qt.ItemFlag.NoItemFlags
 
         return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEditable

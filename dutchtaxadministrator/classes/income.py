@@ -1,12 +1,19 @@
-class Income:
-    invoice_id: str = ""
-    name: str = ""
-    description: str = ""
+from datetime import datetime
+from enum import Enum
+
+from dutchtaxadministrator.classes.sale import Sale
+
+class IncomeType(Enum):
+    MKB_WORK = 0
+    SALARY = 1
+    OTHER_INCOMES = 2
+    RESIDENCE = 3
+    MORGAGE = 4
+
+class Income(Sale):
     client: str  = ""
-    amount_ex_vat: float = 0
-    vat_percentage: float = 0
-    amount_inc_vat: float = 0
     total_hours: float  = 0
+    type: IncomeType = IncomeType.MKB_WORK
 
     def __init__(self):
         self.attachments = []
@@ -19,8 +26,10 @@ class Income:
         """
         return {
             "invoice_id": self.invoice_id,
+            "date": self.date.strftime("%d/%m/%Y"),
             "name": self.name,
             "client": self.client,
+            "type": self.type.value,
             "description": self.description,
             "amount_ex_vat": self.amount_ex_vat,
             "amount_inc_vat": self.amount_inc_vat,
@@ -40,7 +49,9 @@ def from_json(income_json_dict: dict) -> Income:
     income = Income()
     income.invoice_id = income_json_dict["invoice_id"]
     income.name=income_json_dict["name"]
+    income.date = datetime.strptime(income_json_dict["date"], "%d/%m/%Y")
     income.client=income_json_dict["client"]
+    income.type = IncomeType(income_json_dict["type"])
     income.description=income_json_dict["description"]
     income.amount_ex_vat=income_json_dict["amount_ex_vat"]
     income.amount_inc_vat=income_json_dict["amount_inc_vat"]
